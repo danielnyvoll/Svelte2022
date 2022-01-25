@@ -1,9 +1,9 @@
 <script>
-	
+	import Table from "./Table.svelte";
 </script>
 
 <main>
-	
+	<Table></Table>
 </main>
 
 <style>
