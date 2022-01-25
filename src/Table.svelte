@@ -1,18 +1,50 @@
 <script>
 	import stats from './stats.json';
     const tableHeader = Object.keys(stats[0]);
+
+    let sortedPersonData = stats;
+	let selectedHeader = "id";
+	let ascendingOrder = true;
+
+    //Sort by numbers in the table
+    const sortByNumber = (tableHeaders) =>{
+		sortedPersonData = sortedPersonData.sort((obj1,obj2)=>{
+			return ascendingOrder ? Number(obj1[tableHeaders]) - Number(obj2[tableHeaders])
+			: Number(obj2[tableHeaders]) - Number(obj1[tableHeaders])
+		});
+		selectedHeader = tableHeaders;
+	}
+    // SORT BY STRINGs
+	const sortByString = (tableHeaders) => {
+		sortedPersonData = sortedPersonData.sort((obj1, obj2) => {
+			if (obj1[tableHeaders] < obj2[tableHeaders]) {
+					return -1;
+			} else if (obj1[tableHeaders] > obj2[tableHeaders]) {
+				return 1;
+			}
+			return 0;		
+		});
+		if (!ascendingOrder) {
+			sortedPersonData = sortedPersonData.reverse()
+		}
+		selectedHeader = tableHeaders;
+	}
 </script>
 
 <main>
 <table>
   <tr>
   {#each tableHeader as header}
-    <th>{header.replace("_", " ")}</th>
+    <th class:highlighted={selectedHeader === header} on:click={() => (header === "id" || header === "games" || header === "time" || header === "goals" || header === "xG" || header === "assists" || header === "xA" || header === "shots" || header === "key_passes" || header === "yellow_cards" || header === "red_cards" || header === "npg" || header === "npxG" || header === "xGChain" || header === "xGBuildup") ? sortByNumber(header) : sortByString(header)}>
+				{header.replace("_", " ")}
+	
+	{#if header === selectedHeader}	
+	<span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
+					{@html ascendingOrder ? "&#9661;" : "&#9651;"}
+				</span>{/if}</th>
 	{/each}
-	<th>xG90</th>
-	<th>xA90</th>
   </tr>
-  {#each stats as stat}
+  {#each sortedPersonData as stat}
   <tr>
     <td>{stat.id}</td>
     <td>{stat.player_name}</td>
@@ -32,8 +64,6 @@
 	<td>{Math.round(stat.npxG*100)/100}</td>
     <td>{Math.round(stat.xGChain*100)/100}</td>
     <td>{Math.round(stat.xGBuildup*100)/100}</td>
-	<td>{Math.round(stat.xG/stat.games*100)/100}</td>
-	<td>{Math.round(stat.xA/stat.games*100)/100}</td>
 	</tr>
 	{/each}
 </table>
