@@ -32,10 +32,7 @@ function handleNavWithKey(e) {
 	</div>
 
 	<!-- Add some margin-left to this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page) -->
-	<div id="main" class:pushMainToRight={navOpen}>
-		<h2>Sidenav Push Example</h2>
-    <p>This content will slide to the left if you add the class pushMain when navOpen evaluates to true in the parent DIV.</p>
-	</div>
+	<div id="main" class:pushMainToRight={navOpen}></div>
 
 <!-- Use keyboard to handle the sidenav -->
 <svelte:window on:keydown={handleNavWithKey} />
