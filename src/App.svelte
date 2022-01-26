@@ -1,10 +1,18 @@
 <script>
+<<<<<<< HEAD
 	//import Table from "./Table.svelte";
 	import Menu from "./Menu.svelte";
 </script>
 
 <main>
 	<Menu></Menu>
+=======
+	import Table from "./Table.svelte";
+</script>
+
+<main>
+	<Table></Table>
+>>>>>>> ReadStatsToTable
 </main>
 
 <style>
