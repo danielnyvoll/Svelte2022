@@ -4,7 +4,7 @@
 	function handleNav() {
 		navOpen = !navOpen;
 	}
-	
+//Change key?? TODO::
 function handleNavWithKey(e) {
 	console.log(e.code);
 	if (e.code === "F1") {
