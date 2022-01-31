@@ -1,5 +1,4 @@
 <script>
-  import Table from "./Table.svelte";
 	let navOpen = false;
 	function handleNav() {
 		navOpen = !navOpen;
@@ -11,23 +10,25 @@
 		navOpen = !navOpen;
 	  }
   }
-  let show = false;
+  let show = 0;
   function showTable(){
-      show = !show;
+      show = 1;
   }
+  function showMe(){
+      show = 2;
+  }
+  function showContact(){
+    show = 3;
+  }
+  $: (choice = show);
+  export let choice = show;
 </script>
-
-<div id="mySidenav" class="sidenav" class:open={navOpen}>
-  <a href="#a" class="closebtn" on:click={handleNav}>&times;</a>
-  <a href="#b" on:click= {showTable}>Stats</a>
-  <a href="#c" on:click= {showTable}>About me</a>
-  <a href="#d" on:click= {showTable}>Contact</a>
-</div>
-<main>
-  {#if show}
-  <Table></Table>
-  {/if}
-</main>
+  <div id="mySidenav" class="sidenav" class:open={navOpen}>
+    <a href="#a" class="closebtn" on:click={handleNav}>&times;</a>
+    <a href="#b" on:click= {showTable}>Stats</a>
+    <a href="#c" on:click= {showMe}>About me</a>
+    <a href="#d" on:click= {showContact}>Contact</a>
+  </div>
 	
 	<!-- Use Menu Icon to open the sidenav -->
 	<div class="container" class:change={navOpen} on:click={handleNav}>
