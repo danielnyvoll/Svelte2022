@@ -1,28 +1,33 @@
 <script>
+  import Table from "./Table.svelte";
 	let navOpen = false;
-	
 	function handleNav() {
 		navOpen = !navOpen;
 	}
 //Change key?? TODO::
-function handleNavWithKey(e) {
-	console.log(e.code);
-	if (e.code === "F1") {
+  function handleNavWithKey(e) {
+	  console.log(e.code);
+	  if (e.code === "F1") {
 		navOpen = !navOpen;
-	}
-}	
-	
+	  }
+  }
+  let show = false;
+  function showTable(){
+      show = !show;
+  }
 </script>
 
 <div id="mySidenav" class="sidenav" class:open={navOpen}>
   <a href="#a" class="closebtn" on:click={handleNav}>&times;</a>
-  <a href="#b">Stats</a>
-  <a href="#c">About me</a>
-  <a href="#d">Contact</a>
+  <a href="#b" on:click= {showTable}>Stats</a>
+  <a href="#c" on:click= {showTable}>About me</a>
+  <a href="#d" on:click= {showTable}>Contact</a>
 </div>
-
- <!-- Use to open the sidenav -->
-
+<main>
+  {#if show}
+  <Table></Table>
+  {/if}
+</main>
 	
 	<!-- Use Menu Icon to open the sidenav -->
 	<div class="container" class:change={navOpen} on:click={handleNav}>

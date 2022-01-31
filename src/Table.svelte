@@ -1,7 +1,6 @@
 <script>
 	import stats from './stats.json';
     const tableHeader = Object.keys(stats[0]);
-
     let sortedPersonData = stats;
 	let selectedHeader = "id";
 	let ascendingOrder = true;
@@ -67,7 +66,6 @@
 	</tr>
 	{/each}
 </table>
-
 </main>
 
 <style>
