@@ -1,6 +1,14 @@
 <script>
 	import stats from './stats.json';
     const tableHeader = Object.keys(stats[0]);
+   let rand= -1;
+   function getRand() {
+    	fetch("./rand")
+      		.then(d => d.text())
+      		.then(d => (rand = d));
+  	}
+
+
 
     let sortedPersonData = stats;
 	let selectedHeader = "id";
@@ -32,6 +40,8 @@
 </script>
 
 <main>
+	<p>{rand}</p>
+	<button on:click={getRand}>Get players</button>
 <table>
   <tr>
   {#each tableHeader as header}
@@ -67,7 +77,6 @@
 	</tr>
 	{/each}
 </table>
-
 </main>
 
 <style>

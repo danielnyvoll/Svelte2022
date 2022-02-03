@@ -1,18 +1,9 @@
 <script>
 	import Table from "./Table.svelte";
 	import Menu from "./Menu.svelte";
-
-	let rand = -1;
-  function getRand() {
-    fetch("http://localhost:5000/rand")
-      	.then(d => d.text())
-      	.then(d => (rand = d));
-  }
-</script>
+  </script>
 
 <main>
-	<h1>Your number is {rand}!</h1>
-	<button on:click={getRand}>Get a random number</button>
 	<Menu></Menu>
 	<Table></Table>
 </main>
