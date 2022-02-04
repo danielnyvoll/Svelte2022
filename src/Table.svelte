@@ -1,7 +1,7 @@
 <script>
 	import stats from './stats.json';
 	import { onMount } from "svelte";
-    const tableHeader = Object.keys(stats[0]);
+   const tableHeader = Object.keys(stats[0])
 
 	let jsonArray = []
     let rand = [];
