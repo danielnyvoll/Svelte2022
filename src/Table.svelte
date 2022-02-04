@@ -1,15 +1,26 @@
 <script>
 	import stats from './stats.json';
+	import { onMount } from "svelte";
     const tableHeader = Object.keys(stats[0]);
-   let rand= -1;
-   function getRand() {
+
+	let jsonArray = []
+    let rand = [];
+    function getRand() {
     	fetch("./rand")
-      		.then(d => d.text())
+			.then(d => (d.json()))
       		.then(d => (rand = d));
   	}
+	  onMount(async () => {
+		getRand();
+		convertJSON();
+	});
 
-
-
+	function convertJSON(){
+	  jsonArray= JSON.parse(rand);
+	  return jsonArray;
+	}
+	  
+	  
     let sortedPersonData = stats;
 	let selectedHeader = "id";
 	let ascendingOrder = true;
@@ -40,8 +51,26 @@
 </script>
 
 <main>
-	<p>{rand}</p>
+	<table>
+		<tr>
+		<th>Web Name</th>
+		<th>ID</th>
+		<th>Minutes</th>
+		<th>Goals</th>
+		<th>Assist</th>
+		<th>Yellow Cards</th>
+		<th>Red Cards</th>
+		</tr>
+		{#each rand as players}
+				<tr>
+					{#each players as player}
+					<td>{player}</td>
+					{/each}
+				</tr>
+		{/each}
+	</table>
 	<button on:click={getRand}>Get players</button>
+
 <table>
   <tr>
   {#each tableHeader as header}

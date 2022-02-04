@@ -6,6 +6,7 @@ from fpl import FPL
 import asyncio
 import aiohttp
 import random
+import json
 
 sns.set()
 
@@ -24,7 +25,7 @@ def home(path):
 
 @app.route("/rand")
 def hello():
-    return str(asyncio.run(main()))
+    return (asyncio.run(main()))
 
 #@app.route("/stats")
 #def hello():
@@ -130,10 +131,9 @@ async def main():
         listen = []
         scoringer = []
         for player in players:
-            lst = [player.id, (player.first_name + " " + player.web_name), player.minutes, player.goals_scored,player.assists,player.yellow_cards,player.red_cards]
+            lst = [player.web_name,player.id, player.minutes, player.goals_scored,player.assists,player.yellow_cards,player.red_cards]
             scoringer.append(lst)
-        return scoringer
-
+        return json.dumps(scoringer)
 
 if __name__ == "__main__":
     app.run(port=5000 ,debug=True)

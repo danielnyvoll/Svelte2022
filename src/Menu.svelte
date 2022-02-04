@@ -16,7 +16,7 @@ function handleNavWithKey(e) {
 
 <div id="mySidenav" class="sidenav" class:open={navOpen}>
   <a href="#a" class="closebtn" on:click={handleNav}>&times;</a>
-  <a href="#b">Stats</a>
+  <a href="/rand">API</a>
   <a href="#c">About me</a>
   <a href="#d">Contact</a>
 </div>
