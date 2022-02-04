@@ -1,7 +1,11 @@
 <script>
 	import stats from './stats.json';
 	import { onMount } from "svelte";
+<<<<<<< HEAD
    const tableHeader = Object.keys(stats[0])
+=======
+    const tableHeader = Object.keys(stats[0]);
+>>>>>>> ReadStatsToTable
 
 	let jsonArray = []
     let rand = [];
@@ -21,7 +25,11 @@
 	}
 	  
 	  
+<<<<<<< HEAD
     let sortedPersonData = stats;
+=======
+    let sortedPersonData = rand;
+>>>>>>> ReadStatsToTable
 	let selectedHeader = "id";
 	let ascendingOrder = true;
 
@@ -69,7 +77,10 @@
 				</tr>
 		{/each}
 	</table>
+<<<<<<< HEAD
 	<button on:click={getRand}>Get players</button>
+=======
+>>>>>>> ReadStatsToTable
 
 <table>
   <tr>
