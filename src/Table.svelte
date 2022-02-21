@@ -1,36 +1,34 @@
 <script>
 	import stats from './stats.json';
 	import { onMount } from "svelte";
-<<<<<<< HEAD
-   const tableHeader = Object.keys(stats[0])
-=======
-    const tableHeader = Object.keys(stats[0]);
->>>>>>> ReadStatsToTable
+	//const tableHeader = Object.keys(rand[0]);
+    const tableHeader = [0,1,2,3,4,5,6];
 
-	let jsonArray = []
     let rand = [];
-    function getRand() {
-    	fetch("./rand")
+
+	onMount(async () => {
+		await fetch("./rand")
 			.then(d => (d.json()))
       		.then(d => (rand = d));
-  	}
-	  onMount(async () => {
-		getRand();
+		//getRand();
 		convertJSON();
 	});
 
-	function convertJSON(){
-	  jsonArray= JSON.parse(rand);
-	  return jsonArray;
+
+    async function getRand()  {
+     	fetch("./rand")
+			.then(d => (d.json()))
+      		.then(d => (rand = d));
 	}
 	  
-	  
-<<<<<<< HEAD
-    let sortedPersonData = stats;
-=======
-    let sortedPersonData = rand;
->>>>>>> ReadStatsToTable
-	let selectedHeader = "id";
+	function convertJSON() {
+		rand = JSON.parse(rand);
+	}
+
+    //let sortedPersonData = stats;
+	let sortedPersonData = rand;
+	//let selectedHeader = "id";
+	let selectedHeader = "Goals";
 	let ascendingOrder = true;
 
     //Sort by numbers in the table
@@ -56,67 +54,86 @@
 		}
 		selectedHeader = tableHeaders;
 	}
+	
 </script>
 
 <main>
+<h1>{rand[1, 1]}</h1>
 	<table>
 		<tr>
-		<th>Web Name</th>
-		<th>ID</th>
-		<th>Minutes</th>
-		<th>Goals</th>
-		<th>Assist</th>
-		<th>Yellow Cards</th>
-		<th>Red Cards</th>
+			<th>Name</th>
+			<th>ID</th>
+			<th>Minutes</th>
+			<th>Goals</th>
+			<th>Assists</th>
+			<th>Yellow Cards</th>
+			<th>Red Cards</th>
 		</tr>
 		{#each rand as players}
-				<tr>
-					{#each players as player}
-					<td>{player}</td>
-					{/each}
-				</tr>
+			<tr>
+				{#each players as player}
+				<td>{player}</td>
+				{/each}
+			</tr>
 		{/each}
 	</table>
-<<<<<<< HEAD
-	<button on:click={getRand}>Get players</button>
-=======
->>>>>>> ReadStatsToTable
-
-<table>
-  <tr>
-  {#each tableHeader as header}
-    <th class:highlighted={selectedHeader === header} on:click={() => (header === "id" || header === "games" || header === "time" || header === "goals" || header === "xG" || header === "assists" || header === "xA" || header === "shots" || header === "key_passes" || header === "yellow_cards" || header === "red_cards" || header === "npg" || header === "npxG" || header === "xGChain" || header === "xGBuildup") ? sortByNumber(header) : sortByString(header)}>
-				{header.replace("_", " ")}
-	
-	{#if header === selectedHeader}	
-	<span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
-					{@html ascendingOrder ? "&#9661;" : "&#9651;"}
-				</span>{/if}</th>
-	{/each}
-  </tr>
-  {#each sortedPersonData as stat}
-  <tr>
-    <td>{stat.id}</td>
-    <td>{stat.player_name}</td>
-    <td>{stat.games}</td>
-	<td>{stat.time}</td>
-    <td>{stat.goals}</td>
-    <td>{Math.round(stat.xG*100)/100}</td>
-	<td>{stat.assists}</td>
-    <td>{Math.round(stat.xA*100)/100}</td>
-    <td>{stat.shots}</td>
-	<td>{stat.key_passes}</td>
-    <td>{stat.yellow_cards}</td>
-    <td>{stat.red_cards}</td>
-	<td>{stat.position}</td>
-    <td>{stat.team_title}</td>
-    <td>{stat.npg}</td>
-	<td>{Math.round(stat.npxG*100)/100}</td>
-    <td>{Math.round(stat.xGChain*100)/100}</td>
-    <td>{Math.round(stat.xGBuildup*100)/100}</td>
-	</tr>
-	{/each}
-</table>
+	<!--
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>ID</th>
+			<th>Minutes</th>
+			<th>Goals</th>
+			<th>Assists</th>
+			<th>Red Cards</th>
+			<th>Yellow Cards</th>
+		</tr>
+		{#each rand as players}
+		<tr>
+			{#each players as player}
+			<td>{player}</td>
+			{/each}
+		</tr>
+		{/each}
+	</table>
+-->
+<!--
+	<table>
+		<tr>
+		{#each tableHeader as header}
+		  <th class:highlighted={selectedHeader === header} on:click={() => (header === "Goals" || header === "games" || header === "time" || header === "goals" || header === "xG" || header === "assists" || header === "xA" || header === "shots" || header === "key_passes" || header === "yellow_cards" || header === "red_cards" || header === "npg" || header === "npxG" || header === "xGChain" || header === "xGBuildup") ? sortByNumber(header) : sortByString(header)}>
+					  {header.replace("_", " ")}
+		  
+		  {#if header === selectedHeader}	
+		  <span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
+						  {@html ascendingOrder ? "&#9661;" : "&#9651;"}
+					  </span>{/if}</th>
+		  {/each}
+		</tr>
+		{#each sortedPersonData as stat}
+		<tr>
+		  <td>{stat.id}</td>
+		  <td>{stat.player_name}</td>
+		  <td>{stat.games}</td>
+		  <td>{stat.time}</td>
+		  <td>{stat.goals}</td>
+		  <td>{Math.round(stat.xG*100)/100}</td>
+		  <td>{stat.assists}</td>
+		  <td>{Math.round(stat.xA*100)/100}</td>
+		  <td>{stat.shots}</td>
+		  <td>{stat.key_passes}</td>
+		  <td>{stat.yellow_cards}</td>
+		  <td>{stat.red_cards}</td>
+		  <td>{stat.position}</td>
+		  <td>{stat.team_title}</td>
+		  <td>{stat.npg}</td>
+		  <td>{Math.round(stat.npxG*100)/100}</td>
+		  <td>{Math.round(stat.xGChain*100)/100}</td>
+		  <td>{Math.round(stat.xGBuildup*100)/100}</td>
+		  </tr>
+		  {/each}
+	  </table>
+	-->
 </main>
 
 <style>

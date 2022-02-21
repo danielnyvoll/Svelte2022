@@ -1,3 +1,4 @@
+from debugpy import listen
 from flask import Flask, send_from_directory
 import operator
 import seaborn as sns
@@ -127,12 +128,13 @@ async def main():
         DEF_costs = get_costs(DEF_players, 10)
         MID_costs = get_costs(MID_players, 10)
 
-        headers = ["ID","Name","Minutes","Goals","Assists","Yellow Cards", "Red Cards"]
+        headers = ["Name","ID","Minutes","Goals","Assists","Yellow Cards", "Red Cards"]
         listen = []
         scoringer = []
-        for player in players:
+        for player in GK_players:
             lst = [player.web_name,player.id, player.minutes, player.goals_scored,player.assists,player.yellow_cards,player.red_cards]
             scoringer.append(lst)
+        #scoringer = [dict(zip(headers,entry))for entry in scoringer]
         return json.dumps(scoringer)
 
 if __name__ == "__main__":
