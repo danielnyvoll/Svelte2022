@@ -58,7 +58,13 @@
 </script>
 
 <main>
-<h1>{rand[1, 1]}</h1>
+	<h1>
+		{#each rand as players}
+				{#each players as player}
+					{player}
+				{/each}
+		{/each}
+	</h1>
 	<table>
 		<tr>
 			<th>Name</th>
