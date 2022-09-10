@@ -1,7 +1,7 @@
 <script>
 	import Table from "./Table.svelte";
 	import Menu from "./Menu.svelte";
-</script>
+  </script>
 
 <main>
 	<Menu></Menu>
